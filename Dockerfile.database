@@ -1,0 +1,39 @@
+# =================================================
+# Dockerfile - Container de Banco de Dados
+# FinanceAI - SQLite Database Container
+# =================================================
+
+FROM alpine:latest
+
+# Metadados
+LABEL maintainer="FinanceAI"
+LABEL description="Container de Banco de Dados SQLite para FinanceAI"
+LABEL version="1.0"
+
+# Instalar SQLite e ferramentas úteis
+RUN apk add --no-cache \
+    sqlite \
+    sqlite-libs \
+    bash \
+    && rm -rf /var/cache/apk/*
+
+# Criar diretório do banco de dados
+RUN mkdir -p /data && \
+    chmod 755 /data
+
+# Copiar script de inicialização
+COPY init-database.sh /usr/local/bin/init-database.sh
+RUN chmod +x /usr/local/bin/init-database.sh
+
+# Volume para o banco de dados
+VOLUME ["/data"]
+
+# Expor porta para possível acesso futuro
+EXPOSE 3306
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
+    CMD test -d /data || exit 1
+
+# Executar script de inicialização
+CMD ["/usr/local/bin/init-database.sh"]

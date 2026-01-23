@@ -1,0 +1,71 @@
+# =================================================
+# Docker Compose - FinanceAI
+# Arquitetura Multi-Container
+# =================================================
+
+services:
+  # Container do Banco de Dados SQLite
+  database:
+    build:
+      context: .
+      dockerfile: Dockerfile.database
+    container_name: financeai-database
+    volumes:
+      - database-volume:/data
+    restart: unless-stopped
+    networks:
+      - financeai-network
+    healthcheck:
+      test: ["CMD", "test", "-d", "/data"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "5m"
+        max-file: "2"
+
+  # Container da Aplicação Flask
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: financeai-app
+    ports:
+      - "5080:5080"
+    volumes:
+      # Volume para uploads (temporário)
+      - ./uploads:/app/uploads
+      # Volume compartilhado com o banco de dados
+      - database-volume:/app/data
+    env_file:
+      - .env.docker
+    depends_on:
+      database:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - financeai-network
+    healthcheck:
+      test: ["CMD", "python", "-c", "import requests; requests.get('http://localhost:5080/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+networks:
+  financeai-network:
+    driver: bridge
+    name: financeai-network
+
+volumes:
+  database-volume:
+    driver: local
+    name: financeai-database-volume

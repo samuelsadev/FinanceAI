@@ -1,0 +1,390 @@
+/* =================================================
+   VARIÁVEIS DE CORES – DAREDE TI (PALETA VERDE)
+================================================= */
+:root {
+    --primary: #054d2c;
+    --primary-dark: #093823;
+    --primary-light: #177039;
+
+    --secondary: #18771d;
+    --background: #FEFEFE;
+    --card-bg: #ffffff;
+
+    --border: #BCC8C3;
+    --text-main: #303030;
+    --text-muted: #18743b;
+
+    --surface: #f8faf9;
+    --surface-2: #f0f5f3;
+}
+
+/* =================================================
+   RESET E CONFIGURAÇÕES GLOBAIS
+================================================= */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--background);
+    color: var(--text-main);
+    padding: clamp(12px, 2vw, 30px);
+}
+
+/* =================================================
+   CABEÇALHO PRINCIPAL
+================================================= */
+.main-header {
+    text-align: center;
+    margin-bottom: clamp(20px, 3vw, 40px);
+    padding: clamp(20px, 3vw, 30px);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(5, 77, 44, 0.2);
+    max-width: 1600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.main-header h1 {
+    color: white;
+    font-size: clamp(2em, 4vw, 3em);
+    font-weight: bold;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.main-header p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: clamp(1em, 2vw, 1.2em);
+    margin-top: 8px;
+    font-weight: 300;
+}
+
+/* =================================================
+   LAYOUT PRINCIPAL – FLUIDO
+================================================= */
+.layout {
+    width: 100%;
+    max-width: 1600px; /* evita exagero em telas ultra-wide */
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(320px, 420px) 1fr;
+    gap: clamp(16px, 2vw, 30px);
+    padding: 0 clamp(8px, 1vw, 16px);
+}
+
+/* =================================================
+   COMPONENTES - CARDS
+================================================= */
+.card {
+    background: var(--card-bg);
+    padding: clamp(18px, 2vw, 25px);
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+}
+
+.card h2 {
+    margin-bottom: 20px;
+    color: var(--primary);
+}
+
+.card h3 {
+    margin-bottom: 20px;
+    color: var(--secondary);
+}
+
+/* =================================================
+   SIDEBAR - GRÁFICO
+================================================= */
+
+.side-chart {
+    position: relative;
+    padding: 22px;
+    border-radius: 22px;
+    background: linear-gradient(180deg, #ffffff 0%, var(--surface) 100%);
+    box-shadow:
+        0 8px 25px rgba(5, 77, 44, 0.12),
+        inset 0 0 0 1px rgba(5, 77, 44, 0.06);
+}
+
+/* BORDA PARCIAL COM GRADIENTE */
+.side-chart::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border-radius: 22px;
+
+    /* espessura da borda */
+    padding: 5px;
+
+    /* gradiente da borda */
+    background: linear-gradient(
+        180deg,
+        var(--primary-dark) 0%,
+        var(--primary) 45%,
+        var(--primary-light) 75%,
+        transparent 100%
+    );
+
+    /* recorte do centro */
+    -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+
+    /* FORMATO:
+       topo inteiro → desce bastante à esquerda → 
+       pequeno trecho à direita → não fecha */
+    clip-path: polygon(
+        0 0,        /* topo esquerdo */
+        100% 2,    /* topo direito */
+        100% 40%,  /* pequeno trecho à direita */
+        92% 12%,
+        92% 40%,   /* fim do trecho direito */
+        8% 40%,    /* atravessa para esquerda */
+        8% 88%,    /* DESCE MAIS À ESQUERDA */
+        0 88%      /* termina sem fechar */
+    );
+}
+
+.side-chart h3 {
+    text-align: center;
+    font-size: 1.2em;
+    margin-bottom: 16px;
+    color: var(--primary);
+}
+
+#pieChart {
+    width: min(320px, 100%);
+    aspect-ratio: 1 / 1;
+    margin: auto;
+}
+
+
+/* =================================================
+   LEGENDA
+================================================= */
+.legend-item {
+    display: flex;
+    align-items: center;
+    background: var(--surface-2);
+    padding: 12px;
+    border-radius: 10px;
+    margin-top: 10px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.legend-item:hover {
+    background: rgba(15, 79, 50, 0.08);
+    transform: translateX(4px);
+}
+
+.legend-color {
+    width: 18px;
+    height: 18px;
+    border-radius: 6px;
+    margin-right: 12px;
+}
+
+.legend-info strong {
+    display: block;
+    font-size: 0.95em;
+}
+
+.legend-info small {
+    color: var(--text-muted);
+}
+
+.legend-percent {
+    margin-left: auto;
+    font-weight: bold;
+    font-size: 1.1em;
+    color: var(--primary);
+}
+
+/* =================================================
+   UPLOAD SECTION
+================================================= */
+.upload-section {
+    background: var(--surface);
+    border: 3px dashed var(--primary);
+    border-radius: 15px;
+    padding: clamp(24px, 3vw, 40px);
+    text-align: center;
+    margin-bottom: 30px;
+    transition: all 0.3s;
+}
+
+.upload-section:hover {
+    border-color: var(--primary-dark);
+    background: var(--surface-2);
+}
+
+.upload-section h2 {
+    color: var(--primary);
+    margin-bottom: 15px;
+}
+
+.upload-section p {
+    color: var(--text-muted);
+    margin-bottom: 20px;
+}
+
+/* =================================================
+   INPUT FILE
+================================================= */
+.file-input-wrapper {
+    display: inline-block;
+    margin: 10px;
+}
+
+.selected-files {
+    margin-top: 20px;
+    text-align: left;
+    max-height: 220px;
+    overflow-y: auto;
+}
+
+.file-item {
+    background: white;
+    padding: 10px 15px;
+    margin: 5px 0;
+    border-radius: 8px;
+    border-left: 4px solid var(--primary);
+}
+
+/* =================================================
+   BOTÕES
+================================================= */
+.btn {
+    display: inline-block;
+    padding: clamp(12px, 2vw, 15px) clamp(24px, 3vw, 40px);
+    font-size: clamp(0.9em, 1vw, 1.05em);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    text-align: center;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 4px 15px rgba(15, 79, 50, 0.25);
+}
+
+.btn-primary:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+.btn-success {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* =================================================
+   RESULTADOS
+================================================= */
+.results {
+    animation: fadeIn 0.4s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.detail-card {
+    background: var(--surface);
+    padding: 20px;
+    margin: 15px 0;
+    border-radius: 10px;
+    border-left: 5px solid var(--primary);
+}
+
+/* =================================================
+   LOADING
+================================================= */
+.loading {
+    display: none;
+    text-align: center;
+    padding: 20px;
+}
+
+.spinner {
+    border: 4px solid var(--border);
+    border-top: 4px solid var(--primary);
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* =================================================
+   DETALHES DOS DOCUMENTOS
+================================================= */
+.detail-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.info-item {
+    background: white;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+}
+
+.info-label {
+    font-weight: bold;
+    font-size: 0.85em;
+    color: var(--text-muted);
+}
+
+.info-value {
+    margin-top: 4px;
+    font-size: 0.95em;
+    color: var(--text-main);
+}
+
+/* =================================================
+   RESPONSIVO – MOBILE
+================================================= */
+@media (max-width: 900px) {
+    .layout {
+        grid-template-columns: 1fr;
+    }
+
+    #pieChart {
+        width: 240px;
+    }
+}

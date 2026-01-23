@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Histórico de Análises - FinanceAI">
+    <title>Histórico - FinanceAI</title>
+
+    <!-- ApexCharts -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}?v={{ range(1, 10000) | random }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/history.css') }}?v={{ range(1, 10000) | random }}">
+</head>
+
+<body>
+    <!-- CABEÇALHO -->
+    <header class="main-header">
+        <div style="display: flex; align-items: center; justify-content: space-between; max-width: 1600px; margin: 0 auto; width: 100%; padding: 0 20px;">
+            <div style="text-align: left;">
+                <h1 style="color: white; font-size: clamp(2em, 4vw, 2.5em); font-weight: bold; margin: 0; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);">📊 Histórico de Análises</h1>
+                <p style="color: rgba(255, 255, 255, 0.9); font-size: clamp(1em, 2vw, 1.1em); margin-top: 8px; font-weight: 300;">Visualize todos os seus gastos armazenados</p>
+            </div>
+            <a href="/" class="btn btn-primary" style="white-space: nowrap;">← Voltar</a>
+        </div>
+    </header>
+
+    <!-- LAYOUT PRINCIPAL -->
+    <div class="history-container">
+        
+        <!-- CARDS DE RESUMO -->
+        <div class="summary-cards">
+            <div class="summary-card">
+                <div class="card-icon">💰</div>
+                <div class="card-content">
+                    <div class="card-label">Total Gasto</div>
+                    <div class="card-value" id="totalGasto">R$ 0,00</div>
+                </div>
+            </div>
+            
+            <div class="summary-card">
+                <div class="card-icon">📁</div>
+                <div class="card-content">
+                    <div class="card-label">Arquivos Enviados</div>
+                    <div class="card-value" id="totalArquivos">0</div>
+                </div>
+            </div>
+            
+            <div class="summary-card">
+                <div class="card-icon">📊</div>
+                <div class="card-content">
+                    <div class="card-label">Categorias</div>
+                    <div class="card-value" id="totalCategorias">0</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- GRÁFICOS -->
+        <div class="charts-grid">
+            <div class="card">
+                <h3>🍩 Distribuição por Categoria</h3>
+                <div id="donutChart"></div>
+            </div>
+            
+            <div class="card">
+                <h3>📊 Valores por Categoria</h3>
+                <div id="barChart"></div>
+            </div>
+        </div>
+
+        <!-- AGENTE DE IA -->
+        <div class="card ai-section">
+            <h3>🤖 Assistente Financeiro IA</h3>
+            <p>Faça perguntas sobre seus gastos e obtenha insights inteligentes</p>
+            
+            <div class="ai-input-container">
+                <input 
+                    type="text" 
+                    id="aiQuery" 
+                    placeholder="Ex: Quanto gastei em alimentação? Qual foi meu maior gasto?"
+                    class="ai-input"
+                >
+                <button id="aiQueryBtn" class="btn btn-success">
+                    🔍 Perguntar
+                </button>
+            </div>
+            
+            <div id="aiResponse" class="ai-response" style="display: none;"></div>
+            <div id="aiLoading" class="ai-loading" style="display: none;">
+                <div class="spinner"></div>
+                <span>Analisando seus dados...</span>
+            </div>
+        </div>
+
+        <!-- TABELA DE DADOS -->
+        <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h3>📋 Todos os Registros</h3>
+                <input 
+                    type="text" 
+                    id="searchInput" 
+                    placeholder="🔍 Buscar por empresa, categoria, CNPJ..."
+                    class="search-input"
+                >
+            </div>
+            
+            <div id="tableContainer" class="table-container">
+                <table id="dataTable" class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Data</th>
+                            <th>Arquivo</th>
+                            <th>Empresa</th>
+                            <th>Categoria</th>
+                            <th>Valor</th>
+                            <th>CNPJ</th>
+                            <th>Data Doc.</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <!-- Dados serão inseridos aqui -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <div id="noData" class="no-data" style="display: none;">
+                <p>📭 Nenhum registro encontrado</p>
+                <a href="/" class="btn btn-primary">Enviar Primeiro Documento</a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- JavaScript -->
+    <script src="{{ url_for('static', filename='js/config.js') }}?v={{ range(1, 10000) | random }}"></script>
+    <script src="{{ url_for('static', filename='js/charts.js') }}?v={{ range(1, 10000) | random }}"></script>
+    <script src="{{ url_for('static', filename='js/history.js') }}?v={{ range(1, 10000) | random }}"></script>
+</body>
+</html>

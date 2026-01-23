@@ -1,0 +1,42 @@
+# Git
+.git/
+.gitignore
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+*.egg-info/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Documentation
+README.md
+CHANGELOG_ESTILOS.md
+static/README.md
+
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Uploads (será montado como volume)
+uploads/*
+!uploads/.gitkeep
+
+# OS
+.DS_Store
+Thumbs.db
+*.log
+
+# NOTA: .env e start_server.ps1 NÃO estão aqui porque precisam ser copiados
+# As credenciais AWS são necessárias para o funcionamento

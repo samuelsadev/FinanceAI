@@ -1,0 +1,136 @@
+# ============================================
+# ARQUIVOS SENSÍVEIS - NÃO VERSIONAR
+# ============================================
+
+# Credenciais AWS e variáveis de ambiente
+.env
+.env.local
+.env.docker
+.env.production
+.env.*.local
+
+# Scripts com credenciais hardcoded
+start_server.ps1
+run_local.ps1
+deploy.ps1
+*_credentials.*
+
+# Chaves SSH e certificados
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+id_rsa*
+id_dsa*
+
+# ============================================
+# DADOS DO USUÁRIO
+# ============================================
+
+# Uploads (arquivos temporários e potencialmente sensíveis)
+uploads/*
+!uploads/.gitkeep
+
+# Database (SQLite - dados do usuário)
+data/*.db
+data/*.db-journal
+data/*.db-shm
+data/*.db-wal
+data/*.sqlite
+data/*.sqlite3
+!data/.gitkeep
+
+# Backups do banco de dados
+backup_*.db
+*.backup
+backups/
+
+# ============================================
+# PYTHON
+# ============================================
+
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+build/
+dist/
+*.egg-info/
+.eggs/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# ============================================
+# DOCKER
+# ============================================
+
+*.log
+docker-compose.override.yml
+.dockerignore.local
+
+# ============================================
+# IDE E EDITORES
+# ============================================
+
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-*
+*.sublime-workspace
+*.sublime-project
+.project
+.pydevproject
+.settings/
+
+# ============================================
+# SISTEMA OPERACIONAL
+# ============================================
+
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+*.bak
+*~
+
+# ============================================
+# TESTES E COBERTURA
+# ============================================
+
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+coverage.xml
+*.cover
+.hypothesis/
+
+# ============================================
+# DOCUMENTAÇÃO TEMPORÁRIA
+# ============================================
+
+docs/_build/
+site/
+.mkdocs_cache/
+
+# ============================================
+# LOGS E TEMPORÁRIOS
+# ============================================
+
+*.log
+logs/
+tmp/
+temp/
+*.tmp

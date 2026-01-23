@@ -1,0 +1,10 @@
+# ⚠️ EXEMPLO - NÃO USE ESTE ARQUIVO DIRETAMENTE
+# Copie para start_server.ps1 e adicione suas credenciais reais
+
+# Configurar variáveis de ambiente AWS
+$env:AWS_ACCESS_KEY_ID = "sua_access_key_aqui"
+$env:AWS_SECRET_ACCESS_KEY = "sua_secret_key_aqui"
+$env:AWS_REGION = "us-east-1"
+
+# Iniciar o servidor Flask
+python app.py

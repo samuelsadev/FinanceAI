@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Dashboard Financeiro - Análise Inteligente de Gastos">
+    <title>FinanceAI</title>
+
+    <!-- ApexCharts -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}?v={{ range(1, 10000) | random }}">
+</head>
+
+<body>
+    <!-- CABEÇALHO -->
+    <header class="main-header">
+        <div style="display: flex; align-items: center; justify-content: space-between; max-width: 1400px; margin: 0 auto; width: 100%;">
+            <div>
+                <h1>💰 FinanceAI</h1>
+                <p>Análise Inteligente de Gastos</p>
+            </div>
+            <a href="/history" class="btn btn-primary">📊 Ver Histórico</a>
+        </div>
+    </header>
+
+    <!-- LAYOUT PRINCIPAL -->
+    <div class="layout">
+
+        <!-- SIDEBAR COM GRÁFICO DE PIZZA -->
+        <aside class="card side-chart">
+            <h3>📈 Distribuição de Gastos</h3>
+            <div id="pieChart"></div>
+            <div id="legend"></div>
+        </aside>
+
+        <!-- CONTEÚDO PRINCIPAL -->
+        <main>
+            <!-- SEÇÃO DE UPLOAD -->
+            <div class="card upload-section">
+                <h2>📁 Selecione seus Arquivos</h2>
+                <p>Envie notas fiscais, comprovantes de pagamento e transferência (PDF, JPG, PNG, DOC)</p>
+                
+                <div style="margin: 20px 0;">
+                    <label for="fileInput" class="btn btn-primary">
+                        📂 Escolher Arquivos
+                    </label>
+                    <input type="file" id="fileInput" multiple 
+                           accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" style="display: none;">
+                    
+                    <button id="processBtn" class="btn btn-success" disabled>
+                        🚀 Processar Documentos
+                    </button>
+                </div>
+
+                <div id="selectedFiles" class="selected-files"></div>
+            </div>
+
+            <!-- LOADING -->
+            <div id="loading" class="loading">
+                <div class="spinner"></div>
+                <p style="margin-top: 20px; font-size: 1.2em; color: var(--primary);">
+                    Processando seus documentos...
+                </p>
+            </div>
+
+            <!-- RESULTADOS -->
+            <div id="results" class="results" style="display: none;">
+                <!-- RESUMO FINANCEIRO -->
+                <div class="card" style="background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); color: white; margin-bottom: 30px;">
+                    <h2 style="color: white;">💰 Resumo Financeiro</h2>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 20px;">
+                        <div style="background: rgba(255,255,255,0.2); padding: 20px; border-radius: 10px;">
+                            <div style="font-size: 0.9em; opacity: 0.9;">Total de Arquivos</div>
+                            <div style="font-size: 1.8em; font-weight: bold; margin-top: 5px;" id="totalFiles">0</div>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.2); padding: 20px; border-radius: 10px;">
+                            <div style="font-size: 0.9em; opacity: 0.9;">Total Gasto</div>
+                            <div style="font-size: 1.8em; font-weight: bold; margin-top: 5px;" id="totalAmount">R$ 0,00</div>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.2); padding: 20px; border-radius: 10px;">
+                            <div style="font-size: 0.9em; opacity: 0.9;">Categorias</div>
+                            <div style="font-size: 1.8em; font-weight: bold; margin-top: 5px;" id="totalCategories">0</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GRÁFICO DE BARRAS -->
+                <div class="card" style="margin-bottom: 30px;">
+                    <h2>📊 Comparação de Valores por Categoria</h2>
+                    <div id="barChart"></div>
+                </div>
+
+                <!-- DETALHES DOS DOCUMENTOS -->
+                <div class="card">
+                    <h2 style="border-bottom: 3px solid var(--primary); padding-bottom: 10px; margin-bottom: 20px;">
+                        📋 Detalhes dos Documentos
+                    </h2>
+                    <div id="detailsContainer"></div>
+                </div>
+            </div>
+        </main>
+
+    </div>
+
+    <!-- JavaScript -->
+    <script src="{{ url_for('static', filename='js/config.js') }}?v={{ range(1, 10000) | random }}"></script>
+    <script src="{{ url_for('static', filename='js/charts.js') }}?v={{ range(1, 10000) | random }}"></script>
+    <script src="{{ url_for('static', filename='js/fileUpload.js') }}?v={{ range(1, 10000) | random }}"></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}?v={{ range(1, 10000) | random }}"></script>
+</body>
+</html>
+
+<!-- Atualizado em 22/01/2025 - ApexCharts e Layout Grid -->

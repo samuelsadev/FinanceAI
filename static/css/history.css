@@ -1,0 +1,478 @@
+/* =================================================
+   ESTILOS DA PÁGINA DE HISTÓRICO
+   Usando a paleta de cores Darede TI (Verde)
+================================================= */
+
+.history-container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: clamp(20px, 3vw, 30px);
+}
+
+/* CARDS DE RESUMO */
+.summary-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: clamp(16px, 2vw, 20px);
+    margin-bottom: clamp(20px, 3vw, 30px);
+}
+
+.summary-card {
+    background: linear-gradient(135deg, #054d2c 0%, #18771d 100%);
+    color: white;
+    padding: clamp(20px, 3vw, 25px);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 10px 30px rgba(5, 77, 44, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.summary-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(5, 77, 44, 0.3);
+}
+
+.card-icon {
+    font-size: 3em;
+    opacity: 0.9;
+}
+
+.card-content {
+    flex: 1;
+}
+
+.card-label {
+    font-size: 0.9em;
+    opacity: 0.9;
+    margin-bottom: 5px;
+}
+
+.card-value {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+/* GRID DE GRÁFICOS */
+.charts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    gap: clamp(20px, 3vw, 30px);
+    margin-bottom: clamp(20px, 3vw, 30px);
+}
+
+.charts-grid .card {
+    background: linear-gradient(180deg, #ffffff 0%, #f8faf9 100%);
+    border-radius: 22px;
+    box-shadow: 0 8px 25px rgba(5, 77, 44, 0.12);
+    position: relative;
+}
+
+/* Borda decorativa nos cards de gráficos */
+.charts-grid .card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border-radius: 22px;
+    padding: 3px;
+    background: linear-gradient(
+        180deg,
+        #093823 0%,
+        #054d2c 45%,
+        #177039 75%,
+        transparent 100%
+    );
+    -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    clip-path: polygon(
+        0 0,
+        100% 0,
+        100% 30%,
+        95% 30%,
+        95% 10%,
+        5% 10%,
+        5% 70%,
+        0 70%
+    );
+}
+
+@media (max-width: 1100px) {
+    .charts-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* SEÇÃO DO AGENTE DE IA */
+.ai-section {
+    margin-bottom: clamp(20px, 3vw, 30px);
+    background: linear-gradient(180deg, #ffffff 0%, #f8faf9 100%);
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(5, 77, 44, 0.12);
+}
+
+.ai-section h3 {
+    color: #054d2c;
+}
+
+.ai-input-container {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.ai-input {
+    flex: 1;
+    padding: 15px;
+    border: 2px solid #BCC8C3;
+    border-radius: 10px;
+    font-size: 1em;
+    transition: border-color 0.3s ease;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.ai-input:focus {
+    outline: none;
+    border-color: #054d2c;
+    box-shadow: 0 0 0 3px rgba(5, 77, 44, 0.1);
+}
+
+.ai-response {
+    margin-top: 20px;
+    padding: 20px;
+    background: #f8faf9;
+    border-left: 4px solid #054d2c;
+    border-radius: 10px;
+    line-height: 1.6;
+}
+
+.ai-response h4 {
+    margin-top: 0;
+    color: #054d2c;
+}
+
+.ai-loading {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+    padding: 20px;
+    background: #f8faf9;
+    border-radius: 10px;
+    color: #054d2c;
+}
+
+/* BUSCA */
+.search-input {
+    padding: 12px 20px;
+    border: 2px solid #BCC8C3;
+    border-radius: 10px;
+    font-size: 1em;
+    min-width: 300px;
+    transition: border-color 0.3s ease;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #054d2c;
+    box-shadow: 0 0 0 3px rgba(5, 77, 44, 0.1);
+}
+
+/* TABELA */
+.table-container {
+    overflow-x: auto;
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(5, 77, 44, 0.08);
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.data-table thead {
+    background: linear-gradient(135deg, #054d2c 0%, #18771d 100%);
+    color: white;
+}
+
+.data-table th {
+    padding: 15px;
+    text-align: left;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.data-table td {
+    padding: 15px;
+    border-bottom: 1px solid #f0f5f3;
+}
+
+.data-table tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+.data-table tbody tr:hover {
+    background-color: #f8faf9;
+}
+
+.category-badge {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.valor-cell {
+    font-weight: bold;
+    color: #054d2c;
+    font-size: 1.1em;
+}
+
+/* SEM DADOS */
+.no-data {
+    text-align: center;
+    padding: 60px 20px;
+    color: #18743b;
+}
+
+.no-data p {
+    font-size: 1.3em;
+    margin-bottom: 20px;
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 768px) {
+    .summary-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .ai-input-container {
+        flex-direction: column;
+    }
+    
+    .search-input {
+        min-width: 100%;
+        margin-bottom: 15px;
+    }
+    
+    .data-table {
+        font-size: 0.9em;
+    }
+    
+    .data-table th,
+    .data-table td {
+        padding: 10px;
+    }
+}
+
+/* SPINNER (loading) */
+.spinner {
+    border: 4px solid #BCC8C3;
+    border-top: 4px solid #054d2c;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* CARD GENÉRICO */
+.card {
+    background: #ffffff;
+    padding: clamp(18px, 2vw, 25px);
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(5, 77, 44, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 35px rgba(5, 77, 44, 0.12);
+}
+
+.card h2 {
+    margin-bottom: 20px;
+    color: #054d2c;
+    border-bottom: 3px solid #054d2c;
+    padding-bottom: 10px;
+}
+
+.card h3 {
+    margin-bottom: 20px;
+    color: #18771d;
+    text-align: center;
+    font-size: 1.2em;
+}
+
+
+/* HEADER ESPECÍFICO DA PÁGINA DE HISTÓRICO */
+.main-header {
+    text-align: center;
+    margin-bottom: clamp(20px, 3vw, 40px);
+    padding: clamp(20px, 3vw, 30px);
+    background: linear-gradient(135deg, #054d2c 0%, #18771d 100%);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(5, 77, 44, 0.2);
+    max-width: 1600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* BOTÕES */
+.btn {
+    display: inline-block;
+    padding: clamp(12px, 2vw, 15px) clamp(24px, 3vw, 40px);
+    font-size: clamp(0.9em, 1vw, 1.05em);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    text-align: center;
+}
+
+.btn-primary {
+    background: #ffffff;
+    color: #054d2c;
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+}
+
+.btn-primary:hover {
+    background: #f8faf9;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.4);
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #054d2c, #18771d);
+    color: white;
+    box-shadow: 0 4px 15px rgba(5, 77, 44, 0.25);
+}
+
+.btn-success:hover {
+    background: linear-gradient(135deg, #093823, #054d2c);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(5, 77, 44, 0.35);
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* BODY BACKGROUND */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #FEFEFE;
+    color: #303030;
+    padding: clamp(12px, 2vw, 30px);
+}
+
+
+/* CORES DOS BADGES POR CATEGORIA (Paleta Verde Darede TI) */
+.category-badge {
+    background: rgba(5, 77, 44, 0.1);
+    color: #054d2c;
+    border: 1px solid rgba(5, 77, 44, 0.2);
+}
+
+/* Variações sutis de verde para cada categoria */
+[data-category="Alimentação"] .category-badge,
+.category-badge:has-text("Alimentação") {
+    background: rgba(5, 77, 44, 0.15);
+    color: #054d2c;
+}
+
+[data-category="Transporte"] .category-badge {
+    background: rgba(24, 119, 29, 0.15);
+    color: #18771d;
+}
+
+[data-category="Lazer"] .category-badge {
+    background: rgba(23, 112, 57, 0.15);
+    color: #177039;
+}
+
+[data-category="Saúde"] .category-badge {
+    background: rgba(9, 56, 35, 0.15);
+    color: #093823;
+}
+
+[data-category="Educação"] .category-badge {
+    background: rgba(42, 143, 58, 0.15);
+    color: #2a8f3a;
+}
+
+[data-category="Moradia"] .category-badge {
+    background: rgba(15, 92, 56, 0.15);
+    color: #0f5c38;
+}
+
+[data-category="Transferência"] .category-badge {
+    background: rgba(26, 107, 46, 0.15);
+    color: #1a6b2e;
+}
+
+[data-category="Investimento"] .category-badge {
+    background: rgba(35, 107, 47, 0.15);
+    color: #236b2f;
+}
+
+[data-category="Outros"] .category-badge {
+    background: rgba(24, 116, 59, 0.15);
+    color: #18743b;
+}
+
+/* AJUSTES FINAIS DE CONSISTÊNCIA */
+.history-container .card {
+    background: #ffffff;
+}
+
+.history-container .card h3 {
+    color: #054d2c;
+}
+
+/* Links e elementos interativos */
+a {
+    color: #054d2c;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #18771d;
+}
+
+/* Scrollbar personalizada (webkit) */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f0f5f3;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #BCC8C3;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #054d2c;
+}
